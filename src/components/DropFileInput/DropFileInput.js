@@ -1,7 +1,7 @@
 import React,{useRef,useState} from 'react'
 import PropTypes from 'prop-types'
 
-import './drop-file-input.css'
+import './drop-file-input.css';
 
 import { imgConfig } from '../../config/imgConfig'
 import uploadImg from '../../assets/img/cloud-upload-regular-240.png'
@@ -17,6 +17,7 @@ const DropFileInput = props => {
 
     const onDrop = ()=>wrapperRef.current.classList.remove('dragover');
 
+
     const onFileDrop = (e) =>{
         const newFile = e.target.files[0];
         if(newFile) {
@@ -25,8 +26,16 @@ const DropFileInput = props => {
             props.onFileChange(updatedList);
         }
     }
+    
+    const fileRemove = (file)=>{
+        const updatedList = [...fileList];
+        updatedList.splice(fileList.indexOf(file),1)
+        setFileList(updatedList)
+        props.onFileChange(updatedList);
+        }
 
     return (
+        <>
         <div 
             ref={wrapperRef} 
             className="drop-file-input"
@@ -40,6 +49,27 @@ const DropFileInput = props => {
             </div>
             <input type="file" value="" onChange={onFileDrop}/>
         </div>
+        {
+            fileList.length> 0 ? (<div className='drop-file-preview'>
+                <div className='drop-file-preview'>
+                    <p className='drop-file-preview__title'>
+                        Ready to upload
+                    </p>
+                    {fileList.map((item,index)=>(
+                        <div key={index} className='drop-file-preview__item'>
+                            <img src={imgConfig[item.type.split('/')[1]] || imgConfig['default']} alt='' />
+                            <div className='drop-file-preview__item__info'>
+                                <p>{item.name}</p>
+                                <p>{item.size}B</p>
+                            </div>
+                            <span className='drop-file-preview__item__del' onClick={()=>fileRemove(item)}>x</span>
+                        </div>
+                    ))}
+
+                </div>
+            </div>) :null
+        }
+        </>
     )
 }
 
