@@ -1,6 +1,4 @@
 import './App.css';
-import DropFileInput from './components/DropFileInput/DropFileInput';
-import DroppedFileInput from './components/DropFileInput/DroppedFileInput';
 import DropFileUpload from './components/DropFileInput/DropFileUpload'
 
 
