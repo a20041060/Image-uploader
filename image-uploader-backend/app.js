@@ -8,7 +8,7 @@ const crypto = require('crypto');
 const path = require('path');
 const cors = require('cors')
 
-const MongoDBurl="mongodb+srv://a2004:5Uk1WDNnMo1qN2BH@cluster0.4agrp.mongodb.net/fileUploader?retryWrites=true&w=majority"
+const MongoDBurl="mongodb+srv://<account>:<password>@cluster0.4agrp.mongodb.net/fileUploader?retryWrites=true&w=majority"
 
 const app = express();
 
